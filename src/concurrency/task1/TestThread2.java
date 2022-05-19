@@ -1,4 +1,4 @@
-package task1;
+package concurrency.task1;
 
 public class TestThread2 implements Runnable{
 

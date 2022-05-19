@@ -1,4 +1,4 @@
-package task1;
+package concurrency.task1;
 
 public class TestThread extends Thread {
   final Counter counter;

@@ -1,16 +1,17 @@
-package task1;
+package concurrency.task1;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        //states: new, runnable, blocked, terminated completed
         Counter counter = new Counter();
+/*
+        //states: new, runnable, blocked, terminated completed
         TestThread thread1 = new TestThread("first thread", counter);
         TestThread thread2 = new TestThread("second thread", counter);
         System.out.println("state after creating: "+thread1.getState());
         thread2.start();
         thread1.start();
-        System.out.println("state during running : "+thread1.getState());
+        System.out.println("state during synchronization : "+thread1.getState());
         thread1.join(100);
         System.out.println("state after join: "+thread1.getState());
         Thread.sleep(2000);
@@ -22,17 +23,12 @@ public class Main {
         Thread.sleep(300);
         System.out.println("state after wait(500): "+thread3.getState());
 
+*/
 
       //  states: waiting
-//   Thread thread4 = new Thread(new WaitingState());
-//   thread4.start();
-//
-//        System.out.println(thread4.getState());
-
-
-//        Thread thread5 = new Thread(new WaitingState());
-//        thread5.start();
-//        thread5.wait();
+        Thread thread5 = new Thread(new TestThread3());
+        thread5.start();
+        System.out.println("state using wait: "+ thread5.getState());
 
 
 
