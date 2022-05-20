@@ -25,7 +25,7 @@ class Worker {
             System.out.println(seconds);
             Thread.sleep(300);
             seconds++;
-            while (seconds % 5 == 0) {
+            while (seconds % 5 == 0) {//try to use if
                 System.out.println(seconds);
                 Test.lock.wait();
             }
@@ -36,7 +36,7 @@ class Worker {
     @SneakyThrows
     public void message() {
         synchronized (Test.lock) {
-            while (seconds % 5 != 0) {
+            while (seconds % 5 != 0) {//try to use if
                 Test.lock.wait();
             }
             seconds++;
