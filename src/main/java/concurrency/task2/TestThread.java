@@ -1,8 +1,7 @@
 package concurrency.task2;
 
-import lombok.ToString;
+import lombok.SneakyThrows;
 
-@ToString
 class TestThread extends Thread {
 
       private final Object lock;
@@ -12,18 +11,15 @@ class TestThread extends Thread {
         this.lock = object;
     }
 
+    @SneakyThrows
     @Override
     public void run() {
         while (true) {
             synchronized (lock) {
-                try {
                     System.out.println(Thread.currentThread().getName());
-                    Thread.sleep(500);
+                    //Thread.sleep(500);
                     lock.notify();
                     lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
