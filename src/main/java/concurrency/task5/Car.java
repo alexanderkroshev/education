@@ -4,14 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 
 @AllArgsConstructor
-public class Car implements Runnable{
+public class Car implements Runnable {
     int carNumber;
 
     @SneakyThrows
     @Override
     public void run() {
-        System.out.println("car_"+carNumber+ " comes to ferry");
-        Task5Runner.BARRIER.await();
-        System.out.println( "car_"+carNumber+" is moving");
+        System.out.println("car_" + carNumber + " comes to ferry");
+        Ferry.BARRIER.await();
+        System.out.println("car_" + carNumber + " crossed the river");
     }
 }

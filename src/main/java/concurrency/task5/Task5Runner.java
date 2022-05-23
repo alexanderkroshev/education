@@ -1,13 +1,13 @@
 package concurrency.task5;
 
 
-import java.util.concurrent.CyclicBarrier;
+import lombok.SneakyThrows;
 
 public class Task5Runner {
-    final static CyclicBarrier BARRIER = new CyclicBarrier(3, new FerryBoat());
-
+    @SneakyThrows
     public static void main(String[] args) {
         for (int i = 0; i < 15; i++) {
+            Thread.sleep(400);
             new Thread(new Car(i)).start();
         }
     }
