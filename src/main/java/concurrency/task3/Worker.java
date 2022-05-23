@@ -34,4 +34,17 @@ public class Worker {
             lock.notify();
         }
     }
+
+    @SneakyThrows
+    public void anotherMessage() {
+//        synchronized (lock) {
+//            while (seconds % 5 != 0) {
+//                lock.wait();
+//            }
+//            seconds++;
+//            System.out.println("some message");
+//            Thread.sleep(1000);
+//            lock.notify();
+//        }
+    }
 }
