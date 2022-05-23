@@ -8,10 +8,10 @@ public class Test {
 
     public static void main(String[] args) {
         Worker worker = new Worker();
-        Thread clock = new Thread(new Clock(worker));
-        Thread messager = new Thread(new Messenger(worker));
-        clock.start();
-        messager.start();
+        Thread clockThread = new Thread(new Clock(worker));
+        Thread messagerThread = new Thread(new Messenger(worker));
+        clockThread.start();
+        messagerThread.start();
     }
 }
 
