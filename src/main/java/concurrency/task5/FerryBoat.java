@@ -4,10 +4,14 @@ import lombok.SneakyThrows;
 
 public class FerryBoat implements Runnable {
 
-    @SneakyThrows
+
     @Override
     public void run() {
-        Thread.sleep(600);
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("ferry boat moved 3 cars");
     }
 }
