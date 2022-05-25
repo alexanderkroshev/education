@@ -8,6 +8,6 @@ public class FerryBoat implements Runnable {
     @Override
     public void run() {
         Thread.sleep(600);
-        System.out.println("ferry boat moved 3 boats");
+        System.out.println("ferry boat moved 3 cars");
     }
 }

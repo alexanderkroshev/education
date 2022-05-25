@@ -14,7 +14,7 @@ public class TestThread extends Thread {
                 Thread.sleep(1000);
                 counter.increment();
             }
-             } catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
     }
