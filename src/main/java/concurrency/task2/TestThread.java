@@ -1,6 +1,5 @@
 package concurrency.task2;
 
-
 class TestThread extends Thread {
     private final Object lock;
 
@@ -23,6 +22,7 @@ class TestThread extends Thread {
                     throw new RuntimeException(e);
                 }
             }
+            lock.notify();
         }
     }
 }

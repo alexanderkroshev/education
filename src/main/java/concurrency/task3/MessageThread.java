@@ -3,8 +3,8 @@ package concurrency.task3;
 
 class MessageThread extends Thread {
     private final int period;
-    private String mes;
-    private Object lock;
+    private final String mes;
+    private final Object lock;
 
     MessageThread(int period, String mes, Object lock) {
         this.period = period;
