@@ -1,32 +1,29 @@
 package concurrency.task4;
 
-
 import java.util.Random;
-
-import static concurrency.task4.Parking.SEMAPHORE;
-
 
 public class Car extends Thread {
     private int carNumber;
+    private Parking parking;
 
-    public Car(int carNumber) {
+    public Car(int carNumber, Parking parking) {
         this.carNumber = carNumber;
+        this.parking = parking;
     }
 
     @Override
     public void run() {
         System.out.println("Car_" + this.carNumber + " looking for parking spot");
         try {
-            Parking.SEMAPHORE.acquire();
+            parking.getSEMAPHORE().acquire();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
         int parkingNumber = -1;
-        synchronized (Parking.PARKING_PLACES) {
+        synchronized (parking.getPARKING_PLACES()) {
             for (int i = 0; i < 5; i++)
-                if (!Parking.PARKING_PLACES[i]) {
-                    Parking.PARKING_PLACES[i] = true;
+                if (!parking.getPARKING_PLACES()[i]) {
+                    parking.getPARKING_PLACES()[i] = true;
                     parkingNumber = i;
                     System.out.println("Car_" + this.carNumber + " occupied parking spot № " + parkingNumber);
                     break;
@@ -35,27 +32,19 @@ public class Car extends Thread {
 
         if (parkingNumber == -1)
             System.out.println("Car_" + this.carNumber + " can`t find empty place");
-
-
-
         else {
             try {
-                Thread.sleep(getRandomSec());
+                Thread.sleep(5000);//TODO change 5000 to random...
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            synchronized (Parking.PARKING_PLACES) {
-                Parking.PARKING_PLACES[parkingNumber] = false;
+            synchronized (parking.getPARKING_PLACES()) {
+                parking.getPARKING_PLACES()[parkingNumber] = false;
             }
 
-            SEMAPHORE.release();
+            parking.getSEMAPHORE().release();
             System.out.println("Car_" + this.carNumber + " left parking spot");
         }
     }
-
-    private int getRandomSec(){
-        return new Random().nextInt(6000)+2000;
-    }
 }
-
 

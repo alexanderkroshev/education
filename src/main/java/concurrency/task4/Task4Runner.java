@@ -1,17 +1,14 @@
 package concurrency.task4;
 
 
-import java.util.concurrent.Semaphore;
-
 public class Task4Runner {
     public static void main(String[] args) throws InterruptedException {
-         int PARKING_SIZE = 5;
-         boolean[] PARKING_PLACES = new boolean[PARKING_SIZE];
-        Semaphore SEMAPHORE = new Semaphore(PARKING_SIZE, true);
+        Parking parking = new Parking(5);
 
         for (int i = 0; i < 10; i++) {
-            new Car(i).start();
+            new Car(i, parking).start();
             Thread.sleep(200);
         }
     }
 }
+
