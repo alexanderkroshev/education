@@ -1,13 +1,16 @@
 package concurrency.task4;
 
 
+import java.util.Random;
+
 import static concurrency.task4.Parking.SEMAPHORE;
 
 
-public class Car implements Runnable {
+public class Car extends Thread {
     private int carNumber;
 
-    public Car(int i) {
+    public Car(int carNumber) {
+        this.carNumber = carNumber;
     }
 
     @Override
@@ -18,6 +21,7 @@ public class Car implements Runnable {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         int parkingNumber = -1;
         synchronized (Parking.PARKING_PLACES) {
             for (int i = 0; i < 5; i++)
@@ -31,9 +35,12 @@ public class Car implements Runnable {
 
         if (parkingNumber == -1)
             System.out.println("Car_" + this.carNumber + " can`t find empty place");
+
+
+
         else {
             try {
-                Thread.sleep(5000);
+                Thread.sleep(getRandomSec());
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -44,6 +51,10 @@ public class Car implements Runnable {
             SEMAPHORE.release();
             System.out.println("Car_" + this.carNumber + " left parking spot");
         }
+    }
+
+    private int getRandomSec(){
+        return new Random().nextInt(6000)+2000;
     }
 }
 
