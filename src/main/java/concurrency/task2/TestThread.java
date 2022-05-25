@@ -14,12 +14,14 @@ class TestThread extends Thread {
     @SneakyThrows
     @Override
     public void run() {
-        while (true) {
+        int i = 0;
+        while (i<5) {
             synchronized (lock) {
                     System.out.println(Thread.currentThread().getName());
                     //Thread.sleep(500);
                     lock.notify();
                     lock.wait();
+                    i++;
             }
         }
     }

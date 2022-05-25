@@ -12,7 +12,7 @@ public class TestThread1 extends Thread {
     public void run() {
         try {
             synchronized (lock) {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
                 lock.wait();
             }
         } catch (InterruptedException e) {
