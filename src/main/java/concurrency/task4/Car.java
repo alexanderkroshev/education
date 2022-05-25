@@ -1,19 +1,23 @@
 package concurrency.task4;
 
-import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 
 import static concurrency.task4.Parking.SEMAPHORE;
 
-@AllArgsConstructor
+
 public class Car implements Runnable {
     private int carNumber;
 
+    public Car(int i) {
+    }
+
     @Override
-    @SneakyThrows
     public void run() {
         System.out.println("Car_" + this.carNumber + " looking for parking spot");
-        Parking.SEMAPHORE.acquire();
+        try {
+            Parking.SEMAPHORE.acquire();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         int parkingNumber = -1;
         synchronized (Parking.PARKING_PLACES) {
             for (int i = 0; i < 5; i++)
@@ -28,7 +32,11 @@ public class Car implements Runnable {
         if (parkingNumber == -1)
             System.out.println("Car_" + this.carNumber + " can`t find empty place");
         else {
-            Thread.sleep(5000);
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             synchronized (Parking.PARKING_PLACES) {
                 Parking.PARKING_PLACES[parkingNumber] = false;
             }

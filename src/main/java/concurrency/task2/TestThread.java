@@ -2,7 +2,6 @@ package concurrency.task2;
 
 
 class TestThread extends Thread {
-
     private final Object lock;
 
     public TestThread(String name, Object object) {
@@ -13,8 +12,8 @@ class TestThread extends Thread {
     @Override
     public void run() {
         int i = 0;
-        while (i < 5) {
-            synchronized (lock) {
+        synchronized (lock) {
+            while (i < 5) {
                 try {
                     System.out.println(Thread.currentThread().getName());
                     lock.notify();

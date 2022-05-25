@@ -1,17 +1,23 @@
 package concurrency.task5;
 
-import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 
-@AllArgsConstructor
+import java.util.concurrent.BrokenBarrierException;
+
 public class Car implements Runnable {
     int carNumber;
 
-    @SneakyThrows
+    public Car(int carNumber) {
+        this.carNumber = carNumber;
+    }
+
     @Override
     public void run() {
         System.out.println("car_" + carNumber + " comes to ferry");
-        Ferry.BARRIER.await();
+        try {
+            Ferry.BARRIER.await();
+        } catch (InterruptedException | BrokenBarrierException e) {
+            throw new RuntimeException(e);
+        }
         System.out.println("car_" + carNumber + " crossed the river");
     }
 }

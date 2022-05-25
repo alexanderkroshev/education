@@ -1,6 +1,5 @@
 package concurrency.task5;
 
-import lombok.SneakyThrows;
 
 public class FerryBoat implements Runnable {
 
